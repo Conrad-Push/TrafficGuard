@@ -13,15 +13,15 @@ TrafficGuard is a sophisticated network traffic anomaly detection system powered
 
 ## Getting Started
 
-To get started with TrafficGuard, please refer to our [documentation](docs/README.md) for installation and usage instructions.
+To get started with TrafficGuard, please refer to our [documentation](README.md) for installation and usage instructions.
 
 ## Installation
 
-You can install AITrafficGuard by following the steps in our [installation guide](docs/INSTALLATION.md).
+You can install AITrafficGuard by following the steps in our [installation guide](INSTALLATION.md).
 
 ## Usage
 
-Detailed usage instructions and configuration options can be found in our [user guide](docs/USER_GUIDE.md).
+Detailed usage instructions and configuration options can be found in our [user guide](USER_GUIDE.md).
 
 ## Contributing
 
