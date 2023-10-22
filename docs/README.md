@@ -37,4 +37,4 @@ If you have any questions or need support, feel free to contact us at [your.emai
 
 ---
 
-*Copyright © 2023 Conrad Push - AITrafficGuard*
+*Copyright © 2023 Conrad Push - TrafficGuard*
