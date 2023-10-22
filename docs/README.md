@@ -13,7 +13,7 @@ TrafficGuard is a sophisticated network traffic anomaly detection system powered
 
 ## Getting Started
 
-To get started with TrafficGuard, please refer to our [documentation](README.md) for installation and usage instructions.
+To get started with TrafficGuard, please refer to our below sections for installation and usage instructions.
 
 ## Installation
 
