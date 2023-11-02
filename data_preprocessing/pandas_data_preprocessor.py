@@ -34,3 +34,21 @@ class PandasDataPreprocessor(DataPreprocessor):
         else:
             self.logger.error("Data is not loaded!", extra={'data_type': self.data_type})
             return None
+
+    def show_basic_statistics(self):
+        if self.data is not None:
+            self.logger.info("Basic statistics:\n" + str(self.data.describe()), extra={'data_type': self.data_type})
+        else:
+            self.logger.error("Data is not loaded!", extra={'data_type': self.data_type})
+
+    def plot_histogram(self, column):
+        if self.data is not None:
+            import seaborn as sns
+            import matplotlib.pyplot as plt
+
+            plt.figure(figsize=(10, 6))
+            sns.histplot(self.data[column], bins=30, kde=False)
+            plt.title(f'Histogram of {column}')
+            plt.show()
+        else:
+            self.logger.error("Data is not loaded!", extra={'data_type': self.data_type})

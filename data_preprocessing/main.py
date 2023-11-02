@@ -11,6 +11,12 @@ def main():
     train_preprocessor.check_missing_values()
     test_preprocessor.check_missing_values()
 
+    train_preprocessor.show_basic_statistics()
+    test_preprocessor.show_basic_statistics()
+
+    train_preprocessor.plot_histogram('duration')
+    test_preprocessor.plot_histogram('duration')
+
 
 if __name__ == '__main__':
     main()

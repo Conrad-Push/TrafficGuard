@@ -13,3 +13,11 @@ class DataPreprocessor(ABC):
     @abstractmethod
     def check_missing_values(self):
         pass
+
+    @abstractmethod
+    def show_basic_statistics(self):
+        pass
+
+    @abstractmethod
+    def plot_histogram(self, column):
+        pass
