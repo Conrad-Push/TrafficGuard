@@ -24,10 +24,8 @@ class PandasDataPreprocessor(DataPreprocessor):
     def _to_pascal_case_if_needed(s: str):
         parts = s.split('_')
         if len(parts) > 1:
-            # Only apply PascalCase if there is an underscore
             return ''.join(word.capitalize() for word in parts)
         else:
-            # If there is no underscore, just capitalize the first letter
             return s[0].upper() + s[1:]
 
     def choose_columns(self, columns: list[str]):
