@@ -5,6 +5,15 @@ import pandas as pd
 
 
 class PandasDataPreprocessor(DataPreprocessor):
+    def save_data(self, file_path):
+        pass
+
+    def split_data_to_training_and_test(self, test_size=0.2):
+        pass
+
+    def filter_data(self):
+        pass
+
     def __init__(self, data_type='general'):
         super().__init__()
         logging.basicConfig(level=logging.INFO,

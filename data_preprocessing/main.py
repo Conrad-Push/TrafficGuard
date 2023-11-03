@@ -2,20 +2,17 @@ from data_preprocessing.pandas_data_preprocessor import PandasDataPreprocessor
 
 
 def main():
-    train_preprocessor = PandasDataPreprocessor(data_type='training')
-    test_preprocessor = PandasDataPreprocessor(data_type='test')
+    data_processor = PandasDataPreprocessor(data_type='training')
 
-    train_preprocessor.load_data('../data/Train_data.csv')
-    test_preprocessor.load_data('../data/Test_data.csv')
+    data_processor.load_data('../data/IDS_Data1.csv')
 
-    train_preprocessor.check_missing_values()
-    test_preprocessor.check_missing_values()
+    data_processor.check_missing_values()
 
-    train_preprocessor.show_basic_statistics()
-    test_preprocessor.show_basic_statistics()
+    data_processor.show_basic_statistics()
 
-    train_preprocessor.plot_histogram('duration')
-    test_preprocessor.plot_histogram('duration')
+    data_processor.plot_histogram('TotBytes')
+
+    data_processor.plot_histogram('flag')
 
 
 if __name__ == '__main__':
