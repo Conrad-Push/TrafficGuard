@@ -33,9 +33,6 @@ class PandasDataPreprocessor(DataPreprocessor):
 
         self.logger.info("Data split successfully.", extra={'data_type': self.data_type})
 
-    def filter_by_max_value(self, column: str, max_value: int):
-        self.data = self.data[self.data[column] <= max_value]
-
     def load_data(self, file_path):
         try:
             self.data = pd.read_csv(file_path)
