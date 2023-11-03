@@ -39,3 +39,7 @@ class DataPreprocessor(ABC):
     @abstractmethod
     def save_data(self, folder_path: str):
         pass
+
+    @abstractmethod
+    def change_column_names_to_pascal_case(self):
+        pass

@@ -1,4 +1,4 @@
-TotPkts,TotBytes,SrcBytes,flag,service,count,dst_bytes,class
+TotPkts,TotBytes,SrcBytes,Flag,Service,Count,DstBytes,Class
 3.044522437723423,1276,6.4692503167957724,SF,http,22,6.1923624894748714,normal
 2.9444389791664403,1152,6.4692503167957724,SF,eco_i,1,0.0,anomaly
 2.9444389791664403,1152,6.4692503167957724,S0,private,135,0.0,anomaly

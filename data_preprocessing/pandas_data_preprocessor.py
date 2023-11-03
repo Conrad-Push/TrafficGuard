@@ -6,15 +6,32 @@ import numpy as np
 
 
 class PandasDataPreprocessor(DataPreprocessor):
-    def choose_columns(self, columns: list[str]):
-        self.data = self.data[columns]
-
     def __init__(self, data_type='general'):
         super().__init__()
         logging.basicConfig(level=logging.INFO,
                             format='%(asctime)s - %(name)s - %(levelname)s - %(data_type)s - %(message)s')
         self.logger = logging.getLogger(__name__)
         self.data_type = data_type
+
+    def change_column_names_to_pascal_case(self):
+        self.data.columns = [self._to_pascal_case_if_needed(col) for col in self.data.columns]
+
+        self.logger.info(
+            "Column names have been changed to PascalCase where necessary, first letter always capitalized.",
+            extra={'data_type': self.data_type})
+
+    @staticmethod
+    def _to_pascal_case_if_needed(s: str):
+        parts = s.split('_')
+        if len(parts) > 1:
+            # Only apply PascalCase if there is an underscore
+            return ''.join(word.capitalize() for word in parts)
+        else:
+            # If there is no underscore, just capitalize the first letter
+            return s[0].upper() + s[1:]
+
+    def choose_columns(self, columns: list[str]):
+        self.data = self.data[columns]
 
     def save_data(self, folder_path):
         self.training_data.to_csv(folder_path + '/training.csv', index=False)
