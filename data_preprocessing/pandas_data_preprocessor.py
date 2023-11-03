@@ -9,6 +9,13 @@ class PandasDataPreprocessor(DataPreprocessor):
     def choose_columns(self, columns: list[str]):
         self.data = self.data[columns]
 
+    def __init__(self, data_type='general'):
+        super().__init__()
+        logging.basicConfig(level=logging.INFO,
+                            format='%(asctime)s - %(name)s - %(levelname)s - %(data_type)s - %(message)s')
+        self.logger = logging.getLogger(__name__)
+        self.data_type = data_type
+
     def save_data(self, folder_path):
         self.training_data.to_csv(folder_path + '/training.csv', index=False)
         self.test_data.to_csv(folder_path + '/test.csv', index=False)
@@ -28,13 +35,6 @@ class PandasDataPreprocessor(DataPreprocessor):
 
     def filter_by_max_value(self, column: str, max_value: int):
         self.data = self.data[self.data[column] <= max_value]
-
-    def __init__(self, data_type='general'):
-        super().__init__()
-        logging.basicConfig(level=logging.INFO,
-                            format='%(asctime)s - %(name)s - %(levelname)s - %(data_type)s - %(message)s')
-        self.logger = logging.getLogger(__name__)
-        self.data_type = data_type
 
     def load_data(self, file_path):
         try:
@@ -61,7 +61,9 @@ class PandasDataPreprocessor(DataPreprocessor):
 
     def show_basic_statistics(self):
         if self.data is not None:
-            self.logger.info("Basic statistics:\n" + str(self.data.describe()), extra={'data_type': self.data_type})
+            stats = self.data.describe()
+            for stat in stats:
+                self.logger.info(f"Describe {stat}:\n{stats[stat]}", extra={'data_type': self.data_type})
         else:
             self.logger.error("Data is not loaded!", extra={'data_type': self.data_type})
 
