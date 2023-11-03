@@ -25,10 +25,6 @@ class DataPreprocessor(ABC):
         pass
 
     @abstractmethod
-    def filter_by_max_value(self, column: str, max_value: int):
-        pass
-
-    @abstractmethod
     def transform_column_data_to_logarithmic_scale(self, column: str):
         pass
 
