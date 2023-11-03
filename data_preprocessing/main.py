@@ -19,6 +19,7 @@ def main():
         data_processor.transform_column_data_to_logarithmic_scale(column)
         data_processor.plot_histogram(column)
 
+    data_processor.change_column_names_to_pascal_case()
     data_processor.split_data_to_training_and_test()
     data_processor.save_data('../data')
 
