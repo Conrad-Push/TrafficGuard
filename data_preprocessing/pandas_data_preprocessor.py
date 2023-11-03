@@ -5,13 +5,27 @@ import pandas as pd
 
 
 class PandasDataPreprocessor(DataPreprocessor):
-    def save_data(self, file_path):
-        pass
+    def choose_columns(self, columns: list[str]):
+        self.data = self.data[columns]
+
+    def save_data(self, folder_path):
+        self.training_data.to_csv(folder_path + '/training.csv', index=False)
+        self.test_data.to_csv(folder_path + '/test.csv', index=False)
+
+        self.logger.info("Data saved successfully.", extra={'data_type': self.data_type})
 
     def split_data_to_training_and_test(self, test_size=0.2):
-        pass
+        self.data = self.data.sample(frac=1, random_state=42)
+        split_index = int(len(self.data) * test_size)
+        self.test_data = self.data.iloc[:split_index]
+        self.training_data = self.data.iloc[split_index:]
+
+        self.logger.info("Data split successfully.", extra={'data_type': self.data_type})
 
     def filter_data(self):
+        pass
+
+    def filter_by_max_value(self, column: str, max_value: int):
         pass
 
     def __init__(self, data_type='general'):
