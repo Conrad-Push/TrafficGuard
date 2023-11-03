@@ -20,18 +20,16 @@ class DataPreprocessor(ABC):
     def check_missing_values(self):
         pass
 
-    # TODO: Column on discord channel
     @abstractmethod
     def choose_columns(self, columns: list[str]):
         pass
 
-    # TODO: Check to high data, like TotBytes 90736
     @abstractmethod
-    def filter_data(self):
+    def filter_by_max_value(self, column: str, max_value: int):
         pass
 
     @abstractmethod
-    def filter_by_max_value(self, column: str, max_value: int):
+    def transform_column_data_to_logarithmic_scale(self, column: str):
         pass
 
     @abstractmethod

@@ -2,6 +2,7 @@ import logging
 
 from data_preprocessing.data_preprocessor import DataPreprocessor
 import pandas as pd
+import numpy as np
 
 
 class PandasDataPreprocessor(DataPreprocessor):
@@ -14,6 +15,9 @@ class PandasDataPreprocessor(DataPreprocessor):
 
         self.logger.info("Data saved successfully.", extra={'data_type': self.data_type})
 
+    def transform_column_data_to_logarithmic_scale(self, column: str):
+        self.data[column] = np.log(self.data[column] + 1)
+
     def split_data_to_training_and_test(self, test_size=0.2):
         self.data = self.data.sample(frac=1, random_state=42)
         split_index = int(len(self.data) * test_size)
@@ -22,11 +26,8 @@ class PandasDataPreprocessor(DataPreprocessor):
 
         self.logger.info("Data split successfully.", extra={'data_type': self.data_type})
 
-    def filter_data(self):
-        pass
-
     def filter_by_max_value(self, column: str, max_value: int):
-        pass
+        self.data = self.data[self.data[column] <= max_value]
 
     def __init__(self, data_type='general'):
         super().__init__()
