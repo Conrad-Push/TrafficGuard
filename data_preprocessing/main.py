@@ -6,9 +6,11 @@ def main():
     columns_to_transform_to_log = ["TotPkts", "SrcBytes", "dst_bytes"]
 
     data_processor = PandasDataPreprocessor(data_type='IDS_Data1')
+
     data_processor.load_data('../data/IDS_Data1.csv')
     data_processor.check_missing_values()
     data_processor.show_basic_statistics()
+
     data_processor.choose_columns(columns_to_filter)
     for column in columns_to_filter:
         data_processor.plot_histogram(column)
