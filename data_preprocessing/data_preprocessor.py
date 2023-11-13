@@ -29,6 +29,14 @@ class DataPreprocessor(ABC):
         pass
 
     @abstractmethod
+    def scaling_column_data_numerical_attributes(self, column: str):
+        pass
+
+    @abstractmethod
+    def encoding_column_data_categorical_attributes(self, column: str):
+        pass
+
+    @abstractmethod
     def show_basic_statistics(self):
         pass
 

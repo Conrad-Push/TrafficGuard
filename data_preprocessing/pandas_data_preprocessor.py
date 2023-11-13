@@ -1,6 +1,7 @@
 import logging
 
 from data_preprocessing.data_preprocessor import DataPreprocessor
+from sklearn.preprocessing import StandardScaler, LabelEncoder
 import pandas as pd
 import numpy as np
 
@@ -39,6 +40,14 @@ class PandasDataPreprocessor(DataPreprocessor):
 
     def transform_column_data_to_logarithmic_scale(self, column: str):
         self.data[column] = np.log(self.data[column] + 1)
+
+    def scaling_column_data_numerical_attributes(self, column: str):
+        scaler = StandardScaler()
+        self.data[column] = scaler.fit_transform(self.data[column])
+
+    def encoding_column_data_categorical_attributes(self, column: str):
+        label_encoder = LabelEncoder()
+        self.data[column] = label_encoder.fit_transform(self.data[column])
 
     def split_data_to_training_and_test(self, test_size=0.2):
         self.data = self.data.sample(frac=1, random_state=42)
