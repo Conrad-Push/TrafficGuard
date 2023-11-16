@@ -13,6 +13,8 @@ class PandasDataPreprocessor(DataPreprocessor):
                             format='%(asctime)s - %(name)s - %(levelname)s - %(data_type)s - %(message)s')
         self.logger = logging.getLogger(__name__)
         self.data_type = data_type
+        self.scaler = StandardScaler()
+        self.label_encoder = LabelEncoder()
 
     def change_column_names_to_pascal_case(self):
         self.data.columns = [self._to_pascal_case_if_needed(col) for col in self.data.columns]
@@ -42,12 +44,10 @@ class PandasDataPreprocessor(DataPreprocessor):
         self.data[column] = np.log(self.data[column] + 1)
 
     def scaling_column_data_numerical_attributes(self, column: str):
-        scaler = StandardScaler()
-        self.data[column] = scaler.fit_transform(self.data[column])
+        self.data[column] = self.scaler.fit_transform(self.data[column])
 
     def encoding_column_data_categorical_attributes(self, column: str):
-        label_encoder = LabelEncoder()
-        self.data[column] = label_encoder.fit_transform(self.data[column])
+        self.data[column] = self.label_encoder.fit_transform(self.data[column])
 
     def split_data_to_training_and_test(self, test_size=0.2):
         self.data = self.data.sample(frac=1, random_state=42)

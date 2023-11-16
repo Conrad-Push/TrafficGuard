@@ -4,7 +4,7 @@ from data_preprocessing.pandas_data_preprocessor import PandasDataPreprocessor
 def main():
     columns_to_filter = ["TotPkts", "TotBytes", "SrcBytes", "flag", "service", "count", "dst_bytes", "class"]
     columns_to_transform_to_log = ["TotPkts", "SrcBytes", "dst_bytes"]
-    columns_to_encode = ["Flag", "Service", "Class"]
+    columns_to_encode = ["flag", "service", "class"]
 
     data_processor = PandasDataPreprocessor(data_type='IDS_Data1')
 
