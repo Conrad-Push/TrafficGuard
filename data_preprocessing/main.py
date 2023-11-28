@@ -1,4 +1,7 @@
 from pandas_data_preprocessor import PandasDataPreprocessor
+from naive_bayes_classifier import NaiveBayesClassifier
+from decision_tree_classifier import DecisionTreeClassifierModel
+from k_neighbors_classifier import KNeighborsClassifierModel
 
 
 def main():
@@ -33,6 +36,18 @@ def main():
     data_processor.change_column_names_to_pascal_case()
     data_processor.split_data_to_training_and_test()
     data_processor.save_data('../data')
+
+    # Naive Bayes Classifier
+    nb_classifier = NaiveBayesClassifier(data_processor.training_data, data_processor.test_data)
+    nb_classifier.train_and_evaluate()
+
+    # Decision Tree Classifier
+    dt_classifier = DecisionTreeClassifierModel(data_processor.training_data, data_processor.test_data)
+    dt_classifier.train_and_evaluate()
+
+    # K Neighbors Classifier
+    kn_classifier = KNeighborsClassifierModel(data_processor.training_data, data_processor.test_data)
+    kn_classifier.train_and_evaluate()
 
 
 if __name__ == '__main__':
