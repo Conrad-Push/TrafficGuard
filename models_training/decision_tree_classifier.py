@@ -1,4 +1,4 @@
-from classifier import Classifier
+from models_training.classifier import Classifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
