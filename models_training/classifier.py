@@ -21,36 +21,25 @@ class Classifier(ABC):
         pass
 
     def print_normal_statistics(self):
-        predictions = self.model.predict(self.X_test)
-        accuracy = accuracy_score(self.y_test, predictions)
-        confusion = confusion_matrix(self.y_test, predictions)
-        report = classification_report(self.y_test, predictions)
-
-        self.print_statistics(accuracy, confusion, report)
-
-        self.__test_and_print_time_of_prediction()
-
-        print("\n")
+        self.print_statistics(self.X_test, self.y_test)
 
     def print_disturbed_statistics(self):
-        predictions = self.model.predict(self.X_disturbed_test)
-        accuracy = accuracy_score(self.y_disturbed_test, predictions)
-        confusion = confusion_matrix(self.y_disturbed_test, predictions)
-        report = classification_report(self.y_disturbed_test, predictions)
+        self.print_statistics(self.X_disturbed_test, self.y_disturbed_test)
 
-        print("Disturbed Test Data: ")
+    def print_statistics(self, x_data, y_data):
+        predictions = self.model.predict(x_data)
+        accuracy = accuracy_score(y_data, predictions)
+        confusion = confusion_matrix(y_data, predictions)
+        report = classification_report(y_data, predictions)
 
-        self.print_statistics(accuracy, confusion, report)
-
-        self.__test_and_print_time_of_prediction()
-
-        print("\n")
-
-    def print_statistics(self, accuracy, confusion, report):
         print(f"Classifier: {self.name}")
         print(f"Accuracy: {accuracy}")
         print(f"Confusion Matrix:\n{confusion}")
         print(f"Classification Report:\n{report}")
+
+        self.__test_and_print_time_of_prediction()
+
+        print("\n")
 
     def __test_and_print_time_of_prediction(self):
         sizes = [1.0, 0.5, 0.1]
