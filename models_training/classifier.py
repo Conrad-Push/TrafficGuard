@@ -1,10 +1,12 @@
 from abc import ABC, abstractmethod
 
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+import time
 
 
 class Classifier(ABC):
-    def __init__(self, training_data, test_data):
+    def __init__(self, training_data, test_data, name):
+        self.name = name
         self.X_train = training_data.drop('Class', axis=1)
         self.y_train = training_data['Class']
         self.X_test = test_data.drop('Class', axis=1)
@@ -22,6 +24,26 @@ class Classifier(ABC):
         confusion = confusion_matrix(self.y_test, predictions)
         report = classification_report(self.y_test, predictions)
 
+        print(f"Classifier: {self.name}")
         print(f"Accuracy: {accuracy}")
-        print(f"Confusion:\n{confusion}")
-        print(f"Report:\n{report}")
+        print(f"Confusion Matrix:\n{confusion}")
+        print(f"Classification Report:\n{report}")
+
+        self.__test_and_print_time_of_prediction()
+
+        print("\n")
+
+    def __test_and_print_time_of_prediction(self):
+        sizes = [1.0, 0.5, 0.1]
+
+        for size in sizes:
+            start_time = time.time()
+            sample_X_test = self.__get_sample(self.X_test, size)
+            self.model.predict(sample_X_test)
+            elapsed_time = time.time() - start_time
+            print(f"Time for size {size}: {elapsed_time:.5f} seconds")
+
+    @staticmethod
+    def __get_sample(data, size):
+        sample_size = int(len(data) * size)
+        return data[:sample_size]
