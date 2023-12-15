@@ -26,13 +26,14 @@ def load_data(filepath):
 def main():
     filepath = './data/IDS_Data1.csv'
 
-    if os.path.exists('./data/test.csv') and os.path.exists('./data/training.csv'):
+    if os.path.exists('./data/test.csv') and os.path.exists('./data/training.csv') and os.path.exists('./data/disturbed_test.csv'):
         training_data = load_data('./data/training.csv')
         test_data = load_data('./data/test.csv')
+        disturbed_test_data = load_data('./data/disturbed_test.csv')
     else:
-        training_data, test_data = data_preprocessing_main(filepath)
+        training_data, test_data, disturbed_test_data = data_preprocessing_main(filepath)
 
-    model_training_main(training_data, test_data)
+    model_training_main(training_data, test_data, disturbed_test_data)
 
 
 if __name__ == '__main__':

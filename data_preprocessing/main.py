@@ -43,4 +43,4 @@ def main(filepath):
     data_processor.prepare_disturbed_test_data(columns_to_disturb, distribution_rate)
     data_processor.save_data('./data')
 
-    return data_processor.training_data, data_processor.test_data
+    return data_processor.training_data, data_processor.test_data, data_processor.disturbed_test_data
