@@ -5,8 +5,11 @@ from sklearn.metrics import accuracy_score, confusion_matrix, classification_rep
 
 class Classifier(ABC):
     def __init__(self, training_data, test_data):
-        self.training_data = training_data
-        self.test_data = test_data
+        self.X_train = training_data.drop('Class', axis=1)
+        self.y_train = training_data['Class']
+        self.X_test = test_data.drop('Class', axis=1)
+        self.y_test = test_data['Class']
+
         self.model = None
 
     @abstractmethod
@@ -14,13 +17,10 @@ class Classifier(ABC):
         pass
 
     def print_statistics(self):
-        X_test = self.test_data.drop('Class', axis=1)
-        y_test = self.test_data['Class']
-
-        predictions = self.model.predict(X_test)
-        accuracy = accuracy_score(y_test, predictions)
-        confusion = confusion_matrix(y_test, predictions)
-        report = classification_report(y_test, predictions)
+        predictions = self.model.predict(self.X_test)
+        accuracy = accuracy_score(self.y_test, predictions)
+        confusion = confusion_matrix(self.y_test, predictions)
+        report = classification_report(self.y_test, predictions)
 
         print(f"Accuracy: {accuracy}")
         print(f"Confusion:\n{confusion}")
