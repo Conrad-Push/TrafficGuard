@@ -10,7 +10,8 @@ class NaiveBayesClassifier(Classifier):
         X_test = self.test_data.drop('Class', axis=1)
         y_test = self.test_data['Class']
 
-        model = GaussianNB()
+        model = GaussianNB(priors=[0.466, 0.534], var_smoothing=1e-9)
+
         model.fit(X_train, y_train)
 
         predictions = model.predict(X_test)

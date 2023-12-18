@@ -10,7 +10,8 @@ class KNeighborsClassifierModel(Classifier):
         X_test = self.test_data.drop('Class', axis=1)
         y_test = self.test_data['Class']
 
-        model = KNeighborsClassifier()
+        model = KNeighborsClassifier(n_neighbors=3, weights='distance', algorithm='auto', leaf_size=9, p=1)
+        # model = KNeighborsClassifier()
         model.fit(X_train, y_train)
 
         predictions = model.predict(X_test)

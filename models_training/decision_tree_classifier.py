@@ -10,7 +10,8 @@ class DecisionTreeClassifierModel(Classifier):
         X_test = self.test_data.drop('Class', axis=1)
         y_test = self.test_data['Class']
 
-        model = DecisionTreeClassifier()
+        model = DecisionTreeClassifier(criterion= 'gini', max_depth= 10, max_leaf_nodes= 50, min_impurity_decrease= 0, min_samples_leaf= 2, min_samples_split= 2)
+        # model = DecisionTreeClassifier()
         model.fit(X_train, y_train)
         
         predictions = model.predict(X_test)
