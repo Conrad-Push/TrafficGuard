@@ -7,6 +7,7 @@ class DataPreprocessor(ABC):
         self.data = None
         self.training_data = None
         self.test_data = None
+        self.disturbed_test_data = None
 
     @abstractmethod
     def load_data(self, file_path):
@@ -50,4 +51,8 @@ class DataPreprocessor(ABC):
 
     @abstractmethod
     def change_column_names_to_pascal_case(self):
+        pass
+
+    @abstractmethod
+    def prepare_disturbed_test_data(self, columns_to_disturb: list[str], distribution_rate: float):
         pass

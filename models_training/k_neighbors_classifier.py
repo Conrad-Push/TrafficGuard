@@ -1,23 +1,11 @@
 from models_training.classifier import Classifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
 
 class KNeighborsClassifierModel(Classifier):
+    def __init__(self, training_data, test_data, disturbed_test_data):
+        super().__init__(training_data, test_data, disturbed_test_data, "K Neighbors Classifier")
+
     def train_and_evaluate(self):
-        X_train = self.training_data.drop('Class', axis=1)
-        y_train = self.training_data['Class']
-        X_test = self.test_data.drop('Class', axis=1)
-        y_test = self.test_data['Class']
-
-        model = KNeighborsClassifier(n_neighbors=3, weights='distance', algorithm='auto', leaf_size=9, p=1)
-        model.fit(X_train, y_train)
-
-        predictions = model.predict(X_test)
-        accuracy = accuracy_score(y_test, predictions)
-        confusion = confusion_matrix(y_test, predictions)
-        report = classification_report(y_test, predictions)
-        
-        print(f"Accuracy: {accuracy}")
-        print(f"Confusion:\n{confusion}")
-        print(f"Report:\n{report}")
+        self.model = KNeighborsClassifier(n_neighbors=3, weights='distance', algorithm='auto', leaf_size=9, p=1)
+        self.model.fit(self.X_train, self.y_train)

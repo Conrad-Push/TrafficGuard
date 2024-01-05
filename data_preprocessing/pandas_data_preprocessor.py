@@ -1,4 +1,5 @@
 import logging
+import random
 
 from data_preprocessing.data_preprocessor import DataPreprocessor
 from sklearn.preprocessing import StandardScaler, LabelEncoder
@@ -37,6 +38,7 @@ class PandasDataPreprocessor(DataPreprocessor):
     def save_data(self, folder_path):
         self.training_data.to_csv(folder_path + '/training.csv', index=False)
         self.test_data.to_csv(folder_path + '/test.csv', index=False)
+        self.disturbed_test_data.to_csv(folder_path + '/disturbed_test.csv', index=False)
 
         self.logger.info("Data saved successfully.", extra={'data_type': self.data_type})
 
@@ -99,3 +101,12 @@ class PandasDataPreprocessor(DataPreprocessor):
             plt.show()
         else:
             self.logger.error("Data is not loaded!", extra={'data_type': self.data_type})
+
+    def prepare_disturbed_test_data(self, columns_to_disturb, distribution_rate):
+        self.disturbed_test_data = self.test_data.copy()
+        for column in columns_to_disturb:
+            value = self.disturbed_test_data[column]
+
+            self.disturbed_test_data[column] = value + random.random() * distribution_rate * value
+
+        self.logger.info("Disturbed test data prepared successfully.", extra={'data_type': self.data_type})

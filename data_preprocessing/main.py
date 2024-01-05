@@ -12,6 +12,9 @@ def main(filepath):
     columns_to_scaling = ["TotPkts", "TotBytes", "SrcBytes", "dst_bytes"]
     columns_to_encode = ["flag", "service", "class"]
 
+    columns_to_disturb = ['TotPkts', 'TotBytes', 'SrcBytes', 'DstBytes']
+    distribution_rate = 0.1
+
     data_processor = PandasDataPreprocessor(data_type=filename_without_extension)
 
     data_processor.load_data(filepath)
@@ -37,6 +40,7 @@ def main(filepath):
 
     data_processor.change_column_names_to_pascal_case()
     data_processor.split_data_to_training_and_test()
+    data_processor.prepare_disturbed_test_data(columns_to_disturb, distribution_rate)
     data_processor.save_data('./data')
 
-    return data_processor.training_data, data_processor.test_data
+    return data_processor.training_data, data_processor.test_data, data_processor.disturbed_test_data
