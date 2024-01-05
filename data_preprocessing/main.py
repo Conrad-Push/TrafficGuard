@@ -1,15 +1,20 @@
-from pandas_data_preprocessor import PandasDataPreprocessor
+import os
+
+from data_preprocessing.pandas_data_preprocessor import PandasDataPreprocessor
 
 
-def main():
+def main(filepath):
+    filename_with_extension = os.path.basename(filepath)
+    filename_without_extension = os.path.splitext(filename_with_extension)[0]
+
     columns_to_filter = ["TotPkts", "TotBytes", "SrcBytes", "flag", "service", "count", "dst_bytes", "class"]
     columns_to_transform_to_log = ["TotPkts", "TotBytes", "SrcBytes", "dst_bytes"]
     columns_to_scaling = ["TotPkts", "TotBytes", "SrcBytes", "dst_bytes"]
     columns_to_encode = ["flag", "service", "class"]
 
-    data_processor = PandasDataPreprocessor(data_type='IDS_Data1')
+    data_processor = PandasDataPreprocessor(data_type=filename_without_extension)
 
-    data_processor.load_data('../data/IDS_Data1.csv')
+    data_processor.load_data(filepath)
     data_processor.check_missing_values()
     data_processor.show_basic_statistics()
 
@@ -32,8 +37,6 @@ def main():
 
     data_processor.change_column_names_to_pascal_case()
     data_processor.split_data_to_training_and_test()
-    data_processor.save_data('../data')
+    data_processor.save_data('./data')
 
-
-if __name__ == '__main__':
-    main()
+    return data_processor.training_data, data_processor.test_data

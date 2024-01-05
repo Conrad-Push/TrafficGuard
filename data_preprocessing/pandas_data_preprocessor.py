@@ -1,6 +1,6 @@
 import logging
 
-from data_preprocessor import DataPreprocessor
+from data_preprocessing.data_preprocessor import DataPreprocessor
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 import pandas as pd
 import numpy as np
