@@ -21,12 +21,12 @@ class Classifier(ABC):
         pass
 
     def print_normal_statistics(self):
-        self.print_statistics(self.X_test, self.y_test)
+        self.__print_statistics(self.X_test, self.y_test)
 
     def print_disturbed_statistics(self):
-        self.print_statistics(self.X_disturbed_test, self.y_disturbed_test)
+        self.__print_statistics(self.X_disturbed_test, self.y_disturbed_test)
 
-    def print_statistics(self, x_data, y_data):
+    def __print_statistics(self, x_data, y_data):
         predictions = self.model.predict(x_data)
         accuracy = accuracy_score(y_data, predictions)
         confusion = confusion_matrix(y_data, predictions)
